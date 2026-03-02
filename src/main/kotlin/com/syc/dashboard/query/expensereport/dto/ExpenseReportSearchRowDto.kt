@@ -1,0 +1,39 @@
+package com.syc.dashboard.query.expensereport.dto
+
+import com.syc.dashboard.framework.core.dto.TenantBaseDto
+import com.syc.dashboard.query.document.dto.DocumentDto
+import com.syc.dashboard.query.employee.dto.EmployeeDto
+import com.syc.dashboard.query.expensereport.entity.enums.ExpenseByEnum
+import com.syc.dashboard.query.expensereport.entity.enums.ExpenseReportRowStatusEnum
+import com.syc.dashboard.query.expensereport.entity.enums.ExpenseReportStatusEnum
+import com.syc.dashboard.query.jobcode.dto.CostCodeDto
+import com.syc.dashboard.query.jobcode.dto.JobCodeDto
+import com.syc.dashboard.query.settings.dto.ExpenseTypeDto
+import java.util.*
+
+class ExpenseReportSearchRowDto(
+    var id: String = "",
+    tenantId: String = "",
+    var periodFrom: String = "",
+    var periodTo: String = "",
+    var expenseDate: String = "",
+    var jobCodeId: String = "",
+    var jobCodeInfo: JobCodeDto? = null,
+    var costCodeId: String = "",
+    var costCodeInfo: CostCodeDto? = null,
+    var expenseDescription: String = "",
+    var employeeInfo: EmployeeDto? = null,
+    var expenseMileage: Double = 0.0,
+    var expenseMileageRate: Double = 0.655,
+    var expenseTypeId: String = "",
+    var expenseTypeInfo: ExpenseTypeDto? = null,
+    var expenseAmount: Double = 0.0,
+    var expenseBy: ExpenseByEnum = ExpenseByEnum.EMPLOYEE,
+    var receiptNumber: String = "",
+    var receiptDocumentId: String = "",
+    var receiptDocumentInfo: DocumentDto? = null,
+    var expenseReportRowStatus: ExpenseReportRowStatusEnum = ExpenseReportRowStatusEnum.ACTIVE,
+    var createdOn: Date = Date(),
+    var updatedOn: Date = Date(),
+    var status: ExpenseReportStatusEnum,
+) : TenantBaseDto(tenantId = tenantId)

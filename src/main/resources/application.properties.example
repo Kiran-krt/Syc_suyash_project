@@ -1,0 +1,94 @@
+# ===============================
+# = App config
+# ===============================
+spring.application.name=syc-dashboard
+server.port=7071
+server.servlet.context-path=/syc
+management.server.base-path=/syc
+spring.webflux.base-path=/syc
+management.endpoints.web.base-path=/actuator
+management.endpoints.web.exposure.include=health,info
+management.endpoint.health.show-details=always
+syc.spring.security.salt-key=SALT_KEY_SUYASH_CONSULTING
+syc.spring.security.jwt-secret-key=Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=
+syc.spring.security.jwt-token-expiration-time=-1
+syc.system.tenantIds=syc
+app.system.portalUrl=https://syc-timesheet-test01.seahagen.in/syc
+app.system.tenants.syc.portalUrl=https://syc-timesheet-test01.seahagen.in/syc
+
+# ===============================
+# = Profile - dev/test/prod
+# ===============================
+spring.profiles.active=dev
+
+# ===============================
+# = Logging
+# ===============================
+logging.file.name=/var/log/syc/${spring.application.name}/${spring.application.name}-logging.log
+
+# ===============================
+# = Swagger API configuration
+# ===============================
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.tagsSorter=alpha
+springdoc.webjars.prefix=
+syc.swagger.server.urls=http://127.0.0.1:${server.port}${server.servlet.context-path},http://localhost:${server.port}${server.servlet.context-path},http://10.0.1.45:${server.port}${server.servlet.context-path},http://10.0.1.20:${server.port}${server.servlet.context-path}
+
+# ===============================
+# = Redis
+# ===============================
+spring.data.redis.host=192.168.1.109
+spring.data.redis.port=6379
+syc.redis.topic.prefix=syc-
+
+# ===============================
+# = mongodb
+# ===============================
+spring.data.mongodb.host=192.168.1.122
+spring.data.mongodb.port=27017
+spring.data.mongodb.database=SycDashboardTest1
+spring.data.mongodb.username=admin
+spring.data.mongodb.password=secret
+spring.data.mongodb.authentication-database=admin
+logging.level.org.springframework.data.mongodb.core.MongoTemplate=DEBUG
+logging.level.org.springframework.data.mongodb.core.ReactiveMongoTemplate=DEBUG
+
+# ===============================
+# = kafka
+# ===============================
+spring.kafka.bootstrap-servers=192.168.1.109:9092
+spring.kafka.security.protocol=SASL_PLAINTEXT
+spring.kafka.properties.sasl.mechanism=PLAIN
+spring.kafka.properties.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";
+spring.kafka.listener.ack-mode=manual_immediate
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+spring.kafka.consumer.group-id=syc-DashboardConsumer
+spring.kafka.consumer.auto-offset-reset=earliest
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
+spring.kafka.consumer.properties.spring.json.trusted.packages=*
+syc.kafka.topic.prefix=syc-
+logging.level.org.apache.kafka=WARN
+
+# ===============================
+# = Notification
+# ===============================
+app.notification.emailConfig.url=http://gyri-notification-test01.seahagen.in
+app.notification.emailConfig.accountToken=266c77ee-72b4-4633-820b-ba0f6828e408
+app.notification.emailConfig.api=${app.notification.emailConfig.url}/v1/notification/send/${app.notification.emailConfig.accountToken}?type=EMAIL
+
+# ===============================
+# = Documents (NextCloud)
+# ===============================
+spring.codec.max-in-memory-size=20MB
+app.document.cloudUser=cqrs
+app.document.cloudBaseUrl=https://nextcloud-centos.seahagen.in
+app.document.cloudBaseUserUrl=${app.document.cloudBaseUrl}/remote.php/dav/files/${app.document.cloudUser}/${tenantId}/
+app.document.cloudAuth=Y3FyczpjcXJzMTI=
+app.document.userEntities=PROFILE,ATTACHMENT,EXPENSE_REPORT,PROJECT_REPORT
+app.document.systemEntities=PROJECT_REPORT
+app.document.tempFolderPath=/tmp/gyri/documents/syc
+app.document.defaultSystemId=syc-system-1
+app.document.projectReportEntities=OUTFALL_PHOTO
